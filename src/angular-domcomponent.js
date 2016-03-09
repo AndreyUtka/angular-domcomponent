@@ -44,7 +44,9 @@
                         '$controller',
                         '$transclude'
                     ];
-                    instanceWithDi = instanceWithDi.concat(instance.$inject);
+                    if (instance.$inject && instance.$inject.length > 0) {
+                        instanceWithDi = instanceWithDi.concat();
+                    }
                     instanceWithDi.push(instance);
                     return function(scope, el, attrs, $controller, $transclude) {
                         return $injector.invoke(instanceWithDi, this, {
