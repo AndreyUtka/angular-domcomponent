@@ -1,6 +1,7 @@
 describe("angular dom component", function() {
-    var _scope, _compile,
-        instanceConstructorSpy = jasmine.createSpy('instanceConstructorSpy');
+    var _scope, _compile, _$http,
+        defaultConstructorSpy = jasmine.createSpy('instanceConstructorSpy'),
+        httpConstructorSpy = jasmine.createSpy('httpConstructorSpy');
 
     function createEl(html) {
         var elem, compiledElem;
@@ -12,21 +13,34 @@ describe("angular dom component", function() {
 
     var withDefaultComponent = (function() {
         function withDefault(scope, $element, $attrs) {
-            instanceConstructorSpy(scope, $element, $attrs);
+            defaultConstructorSpy(scope, $element, $attrs);
         }
         withDefault.restrict = "E";
         withDefault.template = "<div>far boo</div>";
         return withDefault;
     } ());
 
+
+    var withHttpComponent = (function() {
+        function withHttpComponent(scope, $element, $attrs, $ctrl, $transclude, $http) {
+            httpConstructorSpy(scope, $element, $attrs, $transclude, $http);
+        }
+        withHttpComponent.restrict = "E";
+        withHttpComponent.template = "<div>far boo</div>";
+        withHttpComponent.$inject = ["$http"];
+        return withHttpComponent;
+    } ());
+
     angular.module('app', [])
-        .domComponent('withDefault', withDefaultComponent);
+        .domComponent('withDefault', withDefaultComponent)
+        .domComponent('withHttp', withHttpComponent);
 
     beforeEach(module('app'));
 
-    beforeEach(inject(function($compile, $rootScope) {
+    beforeEach(inject(function($compile, $rootScope, $http) {
         _scope = $rootScope.$new();
         _compile = $compile;
+        _$http = $http;
     }));
 
     it("should be defined domComponent in angular module", function() {
@@ -50,6 +64,13 @@ describe("angular dom component", function() {
         var el = createEl("<with-default></with-default>"),
             attr = { $attr: {}, $$element: el };
 
-        expect(instanceConstructorSpy).toHaveBeenCalledWith(_scope, el, attr);
+        expect(defaultConstructorSpy).toHaveBeenCalledWith(_scope, el, attr);
+    })
+
+    it("should be invoke component instance with http inject service", function() {
+        var el = createEl("<with-http></with-http>"),
+            attr = { $attr: {}, $$element: el };
+
+        expect(httpConstructorSpy).toHaveBeenCalledWith(_scope, el, attr, undefined, _$http);
     })
 });
