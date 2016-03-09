@@ -2,6 +2,12 @@
 
 ### Angular DOM component ###
 
+## Installation
+
+```
+npm i -save angular-domcomponent
+```
+
 Why?
 
 For angular.js 1.x projects which use ES2015 or class-based definition model. 
