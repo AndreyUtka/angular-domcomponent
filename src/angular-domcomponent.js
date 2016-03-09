@@ -18,19 +18,19 @@
     }
     /**
      * DOM component module
-     * @return {angular.module} - angular module with DOM component module.
+     * @return {angular.Module} - angular module with DOM component module.
      */
     function module() {
         var moduleInstance = ng.apply(this, arguments);
         /**
          * @param {string} name - DOM component name
-         * @param {angular.module.directive} instance - DOM component instance
-         * @return {angular.module} - angular module with registered directive instance.
+         * @param {angular.Module.directive} instance - DOM component instance
+         * @return {angular.Module} - angular module with registered directive instance.
          */
         function domComponent(name, instance) {
             /**
              * @param {auto.$injector} $injector - angular $injector
-             * @return {angular.module.directive} - directive instance.
+             * @return {angular.Module.directive} - directive instance.
              */
             function factory($injector) {
                 /**

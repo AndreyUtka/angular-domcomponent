@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test",
+    "test-ci": "gulp test-ci"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   },
   "homepage": "https://github.com/AndreyUtka/angular-domcomponent#readme",
   "devDependencies": {
+    "angular": "^1.5.0",
+    "angular-mocks": "^1.5.0",
     "eslint": "^2.3.0",
     "eslint-config-google": "^0.4.0",
     "eslint-config-xo": "^0.12.0",
@@ -28,6 +31,13 @@
     "gulp-header": "^1.7.1",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.3"
+    "gulp-uglify": "^1.5.3",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.7",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-spec-reporter": "0.0.24",
+    "phantomjs-prebuilt": "^2.1.5"
   }
 }

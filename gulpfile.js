@@ -5,15 +5,13 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     clean = require('gulp-clean'),
     rename = require('gulp-rename'),
-    package = require('./package.json');
+    package = require('./package.json'),
+    karmaServer = require('karma').Server;
 
 var paths = {
     output: 'dist/',
     scripts: [
         'src/angular-domcomponent.js'
-    ],
-    test: [
-        'test/spec/**/*.js'
     ]
 };
 
@@ -26,6 +24,18 @@ var banner = [
     ' */',
     '\n'
 ].join('');
+
+function runKarma(singleRun, done) {
+    var browsers = ['PhantomJS'];
+    if (!singleRun) {
+        browsers.push('Chrome');
+    }
+    new karmaServer({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: singleRun,
+        browsers: browsers,
+    }, done).start();
+}
 
 
 gulp.task('scripts', ['clean'], function() {
@@ -49,6 +59,14 @@ gulp.task('clean', function() {
     return gulp.src(paths.output, { read: false })
         .pipe(plumber())
         .pipe(clean());
+});
+
+gulp.task('test', function(done) {
+    runKarma(false, done);
+});
+
+gulp.task('test-ci', function(done) {
+    runKarma(true, done);
 });
 
 gulp.task('watch', function() {
