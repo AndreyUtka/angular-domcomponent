@@ -2,7 +2,7 @@
 
 ### Angular DOM component ###
 
-## Installation
+### Installation
 
 ```
 npm i -save angular-domcomponent
