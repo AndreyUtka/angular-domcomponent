@@ -1,3 +1,4 @@
+/*! angular-domcomponent v0.0.2 | (c) 2016 @andreyutka | https://github.com/AndreyUtka/angular-domcomponent#readme */
 (function() {
 
     var ng = angular.module;
