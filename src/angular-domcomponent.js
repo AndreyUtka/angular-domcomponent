@@ -1,7 +1,10 @@
 (function() {
-
     var ng = angular.module;
-
+    /**
+     * @param {string} controller - controller name
+     * @param {string} ident - ident
+     * @return {string} valid controller name
+     */
     function identifierForController(controller, ident) {
         if (ident && typeof ident === 'string') {
             return ident;
@@ -13,13 +16,26 @@
             }
         }
     }
-
+    /**
+     * DOM component module
+     * @return {angular.module} - angular module with DOM component module.
+     */
     function module() {
-
         var moduleInstance = ng.apply(this, arguments);
-
+        /**
+         * @param {string} name - DOM component name
+         * @param {angular.module.directive} instance - DOM component instance
+         * @return {angular.module} - angular module with registered directive instance.
+         */
         function domComponent(name, instance) {
+            /**
+             * @param {auto.$injector} $injector - angular $injector
+             * @return {angular.module.directive} - directive instance.
+             */
             function factory($injector) {
+                /**
+                 * @return {Function} - which is called from link directive function
+                 */
                 function makeComponentInstanceWithDI() {
                     var instanceWithDi = [
                         'scope',
@@ -69,7 +85,6 @@
         moduleInstance.domComponent = domComponent;
 
         return moduleInstance;
-
     }
 
     angular.module = module;
