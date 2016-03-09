@@ -51,8 +51,17 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
+gulp.task('watch', function() {
+    gulp.watch(paths.scripts, ['default']);
+});
+
 gulp.task('default', [
     'lint',
     'clean',
     'scripts'
+]);
+
+gulp.task('dev', [
+    'watch',
+    'default'
 ]);

@@ -4,7 +4,8 @@
   "description": "Angular DOM component",
   "main": "index.js",
   "scripts": {
-    "build": "gulp lint",
+    "dev": "gulp dev",
+    "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

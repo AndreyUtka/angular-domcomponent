@@ -4,10 +4,14 @@
     var ng = angular.module;
 
     function identifierForController(controller, ident) {
-        if (ident && typeof ident === 'string') return ident;
+        if (ident && typeof ident === 'string') {
+            return ident;
+        }
         if (typeof controller === 'string') {
             var match = /^(\S+)(\s+as\s+(\w+))?$/.exec(controller);
-            if (match) return match[3];
+            if (match) {
+                return match[3];
+            }
         }
     }
 
