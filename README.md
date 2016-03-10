@@ -55,7 +55,7 @@ export class HelloComponent {
     }
 }
 
-angular.module("app", []).service(HelloComponent.selector, HelloComponent.directiveFactory)
+angular.module("app", []).directive(HelloComponent.selector, HelloComponent.directiveFactory)
 ```
 and inject some services..
 
@@ -89,7 +89,7 @@ export class HelloComponent {
     }
 }
 
-angular.module("app", []).service(HelloComponent.selector, HelloComponent.directiveFactory())
+angular.module("app", []).directive(HelloComponent.selector, HelloComponent.directiveFactory())
 ```
 
 It looks very bulky..
@@ -128,6 +128,6 @@ export class HelloComponent {
     }
 }
 
-angular.module("app", []).service(HelloComponent.selector, HelloComponent)
+angular.module("app", []).domComponent(HelloComponent.selector, HelloComponent)
 ```
 If you have any idea or issue please welcome.
