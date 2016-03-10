@@ -115,7 +115,15 @@ export class HelloComponent {
     static template = require('./hello.html');
     static $inject = ["animate", "$q", "$timeout"];
 
-    constructor(scope: IHelloScope, $animate, $q, $timeout) {
+    constructor(
+        scope: IHelloScope,
+        element: ng.IAugmentedJQuery,
+        attrs: ng.IAugmentedJQuery,
+        controller: any,
+        $transclude: ng.ITranscludeFunction,
+        $animate: ng.IAnimateService, 
+        $q: ng.IQService, 
+        $timeout: ng.ITimeoutService) {
         scope.displayName = 'firstName';
     }
 }
