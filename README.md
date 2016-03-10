@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/AndreyUtka/angular-domcomponent.svg?branch=master)](https://travis-ci.org/AndreyUtka/angular-domcomponent)
+[![npm version](https://img.shields.io/npm/v/angular-domcomponent.svg?style=flat-square)](https://www.npmjs.com/package/angular-domcomponent)
 
 ### Angular DOM component ###
 
