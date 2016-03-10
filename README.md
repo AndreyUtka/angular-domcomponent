@@ -16,7 +16,7 @@ You can use [babel](https://babeljs.io/) or [coffeescript](http://coffeescript.o
 
 if you declare angular service with class definition maybe it looks like this:
 
-```
+```typescript
 export class ServerService {
 
   static $inject = ['$http'];
@@ -36,7 +36,7 @@ angular.module("app", []).service("ServerService", ServerService)
 
 It looks very clear) but if we try to declare in similar way angular directive:
 
-```
+```typescript
 import {IHelloScope} from './hello.model';
 import IDirectiveFactory = ng.IDirectiveFactory;
 
@@ -60,7 +60,7 @@ angular.module("app", []).directive(HelloComponent.selector, HelloComponent.dire
 ```
 and inject some services..
 
-```
+```typescript
 import {IHelloScope} from './hello.model';
 import IDirectiveFactory = ng.IDirectiveFactory;
 
@@ -107,7 +107,7 @@ Angular DOM component - it's also a wrapper of Directive but with:
 
 Finally:
 
-```
+```typescript
 import {IHelloScope} from './hello.model';
 
 export class HelloComponent {
