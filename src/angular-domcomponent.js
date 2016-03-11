@@ -54,7 +54,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                     }
                     instanceWithDi.push(instance);
                     return function(scope, el, attrs, $controller, $transclude) {
-                        return $injector.invoke(instanceWithDi, this, {
+                        return $injector.instantiate(instanceWithDi, {
                             scope: scope,
                             $element: el,
                             $attrs: attrs,
