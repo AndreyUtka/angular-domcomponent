@@ -1,13 +1,19 @@
 {
   "name": "angular-domcomponent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Angular DOM component",
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp",
     "test": "gulp test",
-    "test-ci": "gulp test-ci"
+    "test-ci": "gulp test-ci",
+    "prepublish": "gulp"
   },
+  "files": [
+    "dist/angular-domcomponent.js",
+    "dist/angular-domcomponent.min.js"
+  ],
+  "main": "dist/angular-domcomponent.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndreyUtka/angular-domcomponent.git"

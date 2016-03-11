@@ -16,3 +16,6 @@ node_modules
 
 ## Directory-based project format:
 .idea/
+
+## build directory ##
+dist/
