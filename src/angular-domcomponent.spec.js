@@ -16,6 +16,7 @@ describe("angular dom component", function() {
             defaultConstructorSpy(scope, $element, $attrs);
         }
         withDefault.restrict = "E";
+        withDefault.selector = "withDefault";
         withDefault.template = "<div>far boo</div>";
         return withDefault;
     } ());
@@ -26,14 +27,22 @@ describe("angular dom component", function() {
             httpConstructorSpy(scope, $element, $attrs, $transclude, $http);
         }
         withHttpComponent.restrict = "E";
+        withHttpComponent.selector = "withHttp";
         withHttpComponent.template = "<div>far boo</div>";
-        withHttpComponent.$inject = ["$http"];
+        withHttpComponent.$inject = ["$scope", "$element", "$attrs", "$controller", "$transclude", "$http"];
         return withHttpComponent;
     } ());
 
+    var emptyComponent = (function() {
+        function emptyComponent() { }
+        emptyComponent.selector = "empty";
+        return emptyComponent;
+    } ());
+
     angular.module('app', [])
-        .domComponent('withDefault', withDefaultComponent)
-        .domComponent('withHttp', withHttpComponent);
+        .domComponent(emptyComponent)
+        .domComponent(withDefaultComponent)
+        .domComponent(withHttpComponent);
 
     beforeEach(module('app'));
 
@@ -51,20 +60,20 @@ describe("angular dom component", function() {
         var myModule = angular.module("tmp", []),
             invokeQueue = null;
 
-        myModule.domComponent('a', 'aa');
+        myModule.domComponent(emptyComponent);
         invokeQueue = myModule._invokeQueue;
 
         expect(invokeQueue.length).toBe(1);
         expect(invokeQueue[0][0]).toBe("$compileProvider");
         expect(invokeQueue[0][1]).toBe("directive");
-        expect(invokeQueue[0][2][0]).toBe("a");
+        expect(invokeQueue[0][2][0]).toBe("empty");
     });
 
     it("should be invoke component instance with the correct default list of dependencies", function() {
         var el = createEl("<with-default></with-default>"),
             attr = { $attr: {}, $$element: el };
 
-        expect(defaultConstructorSpy).toHaveBeenCalledWith(_scope, el, attr);
+        expect(defaultConstructorSpy).toHaveBeenCalledWith(undefined, undefined, undefined);
     })
 
     it("should be invoke component instance with http inject service", function() {

@@ -28,11 +28,10 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
     function module() {
         var moduleInstance = ng.apply(this, arguments);
         /**
-         * @param {string} name - DOM component name
          * @param {angular.Module.directive} instance - DOM component instance
          * @return {angular.Module} - angular module with registered directive instance.
          */
-        function domComponent(name, instance) {
+        function domComponent(instance) {
             /**
              * @param {auto.$injector} $injector - angular $injector
              * @return {angular.Module.directive} - directive instance.
@@ -42,20 +41,14 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                  * @return {Function} - which is called from link directive function
                  */
                 function makeComponentInstanceWithDI() {
-                    var instanceWithDi = [
-                        'scope',
-                        '$element',
-                        '$attrs',
-                        '$controller',
-                        '$transclude'
-                    ];
+                    var instanceWithDi = [];
                     if (instance.$inject && instance.$inject.length > 0) {
                         instanceWithDi = instanceWithDi.concat(instance.$inject);
                     }
                     instanceWithDi.push(instance);
                     return function(scope, el, attrs, $controller, $transclude) {
                         return $injector.instantiate(instanceWithDi, {
-                            scope: scope,
+                            $scope: scope,
                             $element: el,
                             $attrs: attrs,
                             $controller: $controller,
@@ -86,7 +79,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
             }
             factory.$inject = ['$injector'];
 
-            return moduleInstance.directive(name, factory);
+            return moduleInstance.directive(instance.selector, factory);
         }
 
         moduleInstance.domComponent = domComponent;

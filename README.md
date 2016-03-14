@@ -96,11 +96,30 @@ angular.module("app", []).directive(HelloComponent.selector, HelloComponent.dire
 It looks very bulky..
 
 In angular 1.5 appears [the component](https://toddmotto.com/exploring-the-angular-1-5-component-method/) - great, but it is a simple wrapper over the classic Directive,
-without possible to inject services and link function.
+without possible to inject services (you can do this only from controller) and link function.
 
 Angular DOM component - it's also a wrapper of Directive but with:
 - possible to inject services
-- link function will call constructor of component.
+- link function will call constructor of the component. 
+  For getting any parameters from link - `$scope`, `$element`, `$attrs`, `$controller`, `$transclude`
+you need to inject them in di property:
+```typescript
+static $inject = ["$scope", "$element", "$attrs", "$controller", "$transclude", "$http"] 
+```
+`$scope`, `$element`, `$attrs`, `$controller`, `$transclude` - all these parameters takes from link function and manually inject:
+
+```typescript
+function link(scope, element, attrs, controller, transclude) {
+    $injector.instantiate(instance, {
+                            $scope: scope,
+                            $element: el,
+                            $attrs: attrs,
+                            $controller: controller,
+                            $transclude: transclude
+    });
+}
+```
+
 - all setting must be a static fields
 
 ![alt tag](http://serialobzor.ru/upload/blogs/72793f9c2fac307f0c2b1b340592eedc.jpg)
@@ -114,13 +133,13 @@ export class HelloComponent {
     static selector = 'hello';
     static restrict = "E";
     static template = require('./hello.html');
-    static $inject = ["animate", "$q", "$timeout"];
+    static $inject = ["$scope", "$element", "$attrs", "$controller", "$transclude", "animate", "$q", "$timeout"];
 
     constructor(
-        scope: IHelloScope,
-        element: ng.IAugmentedJQuery,
-        attrs: ng.IAugmentedJQuery,
-        controller: any,
+        $scope: IHelloScope,
+        $element: ng.IAugmentedJQuery,
+        $attrs: ng.IAugmentedJQuery,
+        $controller: any,
         $transclude: ng.ITranscludeFunction,
         $animate: ng.IAnimateService, 
         $q: ng.IQService, 
