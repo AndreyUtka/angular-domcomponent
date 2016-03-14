@@ -148,6 +148,6 @@ export class HelloComponent {
     }
 }
 
-angular.module("app", []).domComponent(HelloComponent.selector, HelloComponent)
+angular.module("app", []).domComponent(HelloComponent)
 ```
 If you have any idea or issue please welcome.
