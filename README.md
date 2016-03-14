@@ -101,12 +101,12 @@ without possible to inject services (you can do this only from controller) and l
 Angular DOM component - it's also a wrapper of Directive but with:
 - possible to inject services
 - link function will call constructor of the component. 
-  For getting any parameters from link - `$scope`, `$element`, `$attrs`, `$controller`, `$transclude`
+  For getting any parameters from link - `$scope, $element, $attrs, $controller, $transclude`
 you need to inject them in di property:
 ```typescript
 static $inject = ["$scope", "$element", "$attrs", "$controller", "$transclude", "$http"] 
 ```
-`$scope`, `$element`, `$attrs`, `$controller`, `$transclude` - all these parameters takes from link function and manually inject:
+`$scope, $element, $attrs, $controller, $transclude` - all these parameters takes from link function and manually inject:
 
 ```typescript
 function link(scope, element, attrs, controller, transclude) {
