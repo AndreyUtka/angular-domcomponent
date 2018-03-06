@@ -1,9 +1,8 @@
+# Angular DOM component
+
 [![build status](https://img.shields.io/travis/AndreyUtka/angular-domcomponent/master.svg?style=flat-square)](https://travis-ci.org/AndreyUtka/angular-domcomponent)
 [![npm version](https://img.shields.io/npm/v/angular-domcomponent.svg?style=flat-square)](https://www.npmjs.com/package/angular-domcomponent)
 [![npm downloads](https://img.shields.io/npm/dm/angular-domcomponent.svg?style=flat-square)](https://www.npmjs.com/package/angular-domcomponent)
-
-
-### Angular DOM component ###
 
 ### Installation
 
